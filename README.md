@@ -1,85 +1,106 @@
-# Laravel School Management System
+# Laravel Academic Management System
 
-A complete School Management System built with Laravel, designed to manage classes, subjects, and role-based users efficiently.
+A complete Academic Management System built with Laravel, designed to manage classes, subjects, and users with role-based access control. This system helps streamline academic operations efficiently with a clean and user-friendly interface.
 
 ---
 
 ## 🚀 Features
 
-* Assign subjects to classes
-* Prevent duplicate subject assignments
-* Role-based authentication (Admin, Teacher, Student)
-* Clean and responsive UI (Bootstrap)
-* Form validation with proper error handling
+* Class Management
+* Subject Management
+* Assign Subjects to Classes
+* Prevent Duplicate Subject Assignments
+* Role-Based Authentication (Admin, Teacher, Student)
+* Secure Login System
+* Form Validation with Proper Error Handling
+* Clean and Responsive UI (Bootstrap)
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Laravel
-* PHP
-* MySQL
-* Bootstrap
+* **Backend:** Laravel (PHP)
+* **Frontend:** HTML, CSS, Bootstrap
+* **Database:** MySQL
+* **Tools:** VS Code, Git, GitHub
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation Guide
 
-1. Clone the repository:
+### 1. Clone the Repository
 
-   ```bash
-   git clone https://github.com/your-username/laravel-school-management-system.git
-   ```
+```bash
+git clone https://github.com/SufyanTalib01/academic-management-system-laravel.git
+```
 
-2. Go to project folder:
+### 2. Navigate to Project Folder
 
-   ```bash
-   cd laravel-school-management-system
-   ```
+```bash
+cd academic-management-system-laravel
+```
 
-3. Install dependencies:
+### 3. Install Dependencies
 
-   ```bash
-   composer install
-   npm install && npm run dev
-   ```
+```bash
+composer install
+npm install && npm run dev
+```
 
-4. Setup environment:
+### 4. Setup Environment File
 
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-5. Configure database in `.env`
+### 5. Configure Database
 
-6. Run migrations:
+Open `.env` file and update:
 
-   ```bash
-   php artisan migrate
-   ```
+```env
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-7. Start server:
+### 6. Run Migrations
 
-   ```bash
-   php artisan serve
-   ```
+```bash
+php artisan migrate
+```
+
+### 7. Start Development Server
+
+```bash
+php artisan serve
+```
+
+Now open your browser and visit:
+
+```
+http://127.0.0.1:8000
+```
 
 ---
 
-## 📌 Key Highlight
+## 📌 Key Highlights
 
-This project includes a validation system that prevents assigning the same subject multiple times to a class, ensuring data integrity.
-
----
-
-## 📷 Screenshots
-
-(Add screenshots here)
+* Prevents assigning duplicate subjects to the same class
+* Implements role-based access control
+* Clean architecture and maintainable code structure
+* Beginner-friendly Laravel project
 
 ---
 
 ## 👨‍💻 Author
 
-**Your Name**
-Muhammad Sufyan
+**Muhammad Sufyan**
+
+GitHub: https://github.com/SufyanTalib01
+
+---
+
+## 📄 License
+
+This project is open-source and available for learning purposes.
