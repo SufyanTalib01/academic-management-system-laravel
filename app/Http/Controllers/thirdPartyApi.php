@@ -12,7 +12,7 @@ class thirdPartyApi extends Controller
 {
     public function getApiData()
     {
-        $data = Http::get(url: 'https://jsonplaceholder.typicode.com/users');
+        $data = Http::withoutVerifying()->get(url: 'https://jsonplaceholder.typicode.com/users');
         $respone = $data->json();
         return view('api.third_api')->with('items', $respone);
     }
