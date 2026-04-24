@@ -60,6 +60,9 @@ class Kernel extends HttpKernel
         // student 
         'student.auth' => \App\Http\Middleware\StudentAuth::class,
         'student.guest' => \App\Http\Middleware\StudentGuest::class,
+        // Teacher 
+        'teacher.auth' => \App\Http\Middleware\TeacherAuthenticate::class,
+        'teacher.guest' => \App\Http\Middleware\TeacherRedirect::class,
         // already 
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

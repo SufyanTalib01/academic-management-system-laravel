@@ -37,7 +37,7 @@ Route::get('/', function () {
 });
 
 
-
+// Student 
 Route::group(['prefix' => 'student'], function () {
 
     Route::group(['middleware' => 'student.guest'], function () {
@@ -53,6 +53,19 @@ Route::group(['prefix' => 'student'], function () {
     });
 });
 
+
+// Teacher 
+Route::group(['prefix' => 'teacher.guest'], function () {
+    Route::group(['middleware' => ''], function () {
+        Route::get('/login', [TeacherController::class, 'teacherLogin'])->name('teacher.login');
+        Route::post('/login', [TeacherController::class, 'teacherAuthenticate'])->name('teacher.authenticate');
+    });
+
+    Route::group(['middleware' => 'teacher.auth'], function () {
+        Route::get('/dashboard', [TeacherController::class, 'teacherDashboard'])->name('teacher.dashboard');
+        Route::get('/logout', [TeacherController::class, 'teacherLogout'])->name('teacher.logout');
+    });
+});
 
 
 Route::group(['prefix' => 'admin'], function () {
