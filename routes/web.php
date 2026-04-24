@@ -11,6 +11,7 @@ use App\Http\Controllers\FeeStructureController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\thirdPartyApi;
 use App\Http\Controllers\userController;
 use App\Models\Announcement;
@@ -127,6 +128,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/assign-subject/edit/{id}', [AssignSubjectToClassController::class, 'edit'])->name('assign-subject.edit');
         Route::put('/assign-subject/update/{id}', [AssignSubjectToClassController::class, 'update'])->name('assign-subject.update');
         Route::get('/assign-subject/delete/{id}', [AssignSubjectToClassController::class, 'delete'])->name('assign-subject.delete');
+
+        // Teacher Management routes
+        Route::get('/teacher/create', [TeacherController::class, 'index'])->name('teacher.create');
+        Route::post('/teacher/store', [TeacherController::class, 'store'])->name('teacher.store');
+        Route::get('/teacher/read', [TeacherController::class, 'read'])->name('teacher.read');
+        Route::get('/teacher/edit/{id}', [TeacherController::class, 'edit'])->name('teacher.edit');
+        Route::put('/teacher/update/{id}', [TeacherController::class, 'update'])->name('teacher.update');
+        Route::get('/teacher/delete/{id}', [TeacherController::class, 'delete'])->name('teacher.delete');
 
         // Announcement
         Route::get('/announcement/create', [AnnouncementController::class, 'index'])->name('announcement.create');
