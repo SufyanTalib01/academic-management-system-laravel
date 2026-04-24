@@ -49,7 +49,42 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $teacher = User::findOrFail($id);
-        return view('admin.teacher.edit_form', compact('teacher'));
+        return view('admin.teacher.edit', compact('teacher'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Find the teacher by ID
+        $teacher = User::findOrFail($id);
+
+        // Validate the incoming request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'required|string|max:255',
+            'dob' => 'required|date',
+            'mob' => 'required|string|max:20',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8',
+        ]);
+
+        // Update the teacher data
+        $teacher->name = $request->name;
+        $teacher->father_name = $request->father_name;
+        $teacher->mother_name = $request->mother_name;
+        $teacher->dob = $request->dob;
+        $teacher->mob = $request->mob;
+        $teacher->email = $request->email;
+
+        // Only update password if provided
+        if ($request->filled('password')) {
+            $teacher->password = Hash::make($request->password);
+        }
+
+        $teacher->save();
+
+        // Redirect back with a success message
+        return redirect()->route('teacher.read')->with('success', 'Teacher updated successfully!');
     }
 
     public function delete($id)

@@ -22,12 +22,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Student</h1>
+                        <h1>Edit Teacher</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Edit Student</li>
+                            <li class="breadcrumb-item active">Edit Teacher</li>
                         </ol>
                     </div>
                 </div>
@@ -47,74 +47,26 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Student</h3>
+                                <h3 class="card-title">Edit Teacher</h3>
                             </div>
 
 
 
-                            <form action="{{ route('student.update', $student->id) }}" method="post">
+                            <form action="{{ route('teacher.update', $teacher->id) }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
 
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            <label>Select Academy</label>
-                                            <Select name="academic_year_id"
-                                                class="form-control @error('academic_year_id') is-invalid @enderror">
-                                                <option value="" disabled selected>Select Academy</option>
-                                                @foreach ($academic_years as $academy_year)
-                                                    <option value="{{ $academy_year->id }}"
-                                                        {{ $student->academic_year_id == $academy_year->id ? 'Selected' : '' }}>
-                                                        {{ $academy_year['name'] }}
-                                                    </option>
-                                                @endforeach
-                                            </Select>
-                                            @error('academic_year_id')
-                                                <p class="invalid-feedback">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label>Select Class</label>
-                                            <Select name="class_id"
-                                                class="form-control @error('class_id') is-invalid @enderror">
 
-                                                <option value="" disabled selected>Select Class</option>
-
-                                                @foreach ($classes as $class)
-                                                    <option value="{{ $class->id }}"
-                                                        {{ $student->class_id == $class->id ? 'selected' : '' }}>
-                                                        {{ $class->name }}
-                                                    </option>
-                                                @endforeach
-
-                                            </Select>
-                                            @error('class_id')
-                                                <p class="invalid-feedback">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label>Admission Date</label>
-                                            <input type="date" name="admission_date"
-                                                value="{{ $student->admission_date }}"
-                                                class="form-control @error('admission_date')
-                                                is-invalid
-                                            @enderror">
-                                            @error('admission_date')
-                                                <p class="invalid-feedback">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
 
                                     <div class="row">
                                         <div class="form-group col-md-4">
-                                            <label for="father_name">Student Name</label>
-                                            <input type="text" name="name" id="name"
-                                                value="{{ $student->name }}"
+                                            <label for="father_name">Teacher Name</label>
+                                            <input type="text" name="name" id="name" value="{{ $teacher->name }}"
                                                 class="form-control @error('name')
                                                 is-invalid
                                             @enderror"
-                                                placeholder="Enter Student Name">
+                                                placeholder="Enter Teacher Name">
                                             @error('name')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                             @enderror
@@ -122,26 +74,26 @@
 
                                         <div class="form-group col-md-4">
 
-                                            <label for="father_name">Student's Father Name</label>
+                                            <label for="father_name">Teacher's Father Name</label>
                                             <input type="text" name="father_name" id="father_name"
-                                                value="{{ $student->father_name }}"
+                                                value="{{ $teacher->father_name }}"
                                                 class="form-control  @error('father_name')
                                                 is-invalid
                                             @enderror"
-                                                placeholder="Enter Student's Father Name">
+                                                placeholder="Enter Teacher's Father Name">
                                             @error('father_name')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                             @enderror
                                         </div>
 
                                         <div class="form-group col-md-4">
-                                            <label for="father_name">Student's Mother Name</label>
+                                            <label for="father_name">Teacher's Mother Name</label>
                                             <input type="text" name="mother_name" id="mother_name"
-                                                value="{{ $student->mother_name }}"
+                                                value="{{ $teacher->mother_name }}"
                                                 class="form-control  @error('mother_name')
                                                 is-invalid
                                             @enderror"
-                                                placeholder="Enter Student's Mother Name">
+                                                placeholder="Enter Teacher's Mother Name">
                                             @error('mother_name')
                                                 <p class="invalid-feedback">{{ $message }}</p>
                                             @enderror
@@ -152,7 +104,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label for="father_name">Date Of Birth</label>
-                                            <input type="date" name="dob" id="dob" value="{{ $student->dob }}"
+                                            <input type="date" name="dob" id="dob" value="{{ $teacher->dob }}"
                                                 class="form-control  @error('dob')
                                                 is-invalid
                                             @enderror">
@@ -164,9 +116,9 @@
                                         <div class="form-group col-md-4">
 
                                             <label for="father_name">Mobile Number</label>
-                                            <input type="text" name="mob" id="mob" value="{{ $student->mob }}"
+                                            <input type="text" name="mob" id="mob" value="{{ $teacher->mob }}"
                                                 class="form-control  @error('mob')
-                                                is-invalid 
+                                                is-invalid
                                             @enderror"
                                                 placeholder="Enter Mobile Number">
                                             @error('mob')
@@ -179,7 +131,7 @@
                                         <div class="form-group col-md-4">
                                             <label for="father_name">Email Address</label>
                                             <input type="email" name="email" id="email"
-                                                value="{{ $student->email }}"
+                                                value="{{ $teacher->email }}"
                                                 class="form-control @error('email')
                                                 is-invalid
                                             @enderror"
@@ -211,11 +163,6 @@
                                 </div>
                             </form>
                         </div>
-
-
-
-
-
 
 
 
