@@ -68,7 +68,7 @@
                                         <label for="subject_id">Subject Name</label>
                                         <Select class="form-control @error('subject_id') is-invalid @enderror"
                                             id="subject_id" name="subject_id">
-                                            <option value="">Select Subject</option>
+                                            <option value="">Select Subject here</option>
                                             @foreach ($subjects as $subject)
                                                 <option value="{{ $subject->subject->id }}"
                                                     {{ old('subject_id', $assignTeacherToClass->subject_id) == $subject->subject->id ? 'selected' : '' }}>
