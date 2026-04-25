@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <link rel="stylesheet" href="dist/css/adminlte.min2167.css?v=3.2.0">
     @yield('customCss')
 
@@ -430,6 +432,32 @@
                                     <a href="{{ route('assign-subject.read') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>View Class and Subjects</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <p>
+                                    Assign Teacher to Class
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('assign-teacher.create') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Assign Teacher to Class</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('assign-teacher.read') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View Class and Teachers</p>
                                     </a>
                                 </li>
 

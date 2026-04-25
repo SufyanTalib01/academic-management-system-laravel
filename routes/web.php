@@ -4,6 +4,7 @@ use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AssignSubjectToClassController;
+use App\Http\Controllers\AssignTeacherToClassController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\FeeHeadController;
@@ -20,6 +21,7 @@ use App\Models\FeeHead;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Socialite;
 use Monolog\Handler\RotatingFileHandler;
+use PhpParser\Node\Expr\Assign;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +57,8 @@ Route::group(['prefix' => 'student'], function () {
 
 
 // Teacher 
-Route::group(['prefix' => 'teacher.guest'], function () {
-    Route::group(['middleware' => ''], function () {
+Route::group(['prefix' => 'teacher'], function () {
+    Route::group(['middleware' => 'teacher.guest'], function () {
         Route::get('/login', [TeacherController::class, 'teacherLogin'])->name('teacher.login');
         Route::post('/login', [TeacherController::class, 'teacherAuthenticate'])->name('teacher.authenticate');
     });
@@ -64,6 +66,8 @@ Route::group(['prefix' => 'teacher.guest'], function () {
     Route::group(['middleware' => 'teacher.auth'], function () {
         Route::get('/dashboard', [TeacherController::class, 'teacherDashboard'])->name('teacher.dashboard');
         Route::get('/logout', [TeacherController::class, 'teacherLogout'])->name('teacher.logout');
+        Route::get('/change-password', [TeacherController::class, 'changePassword'])->name('teacher.changePassword');
+        Route::put('/update-password', [TeacherController::class, 'updatePassword'])->name('teacher.updatePassword');
     });
 });
 
@@ -142,6 +146,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/assign-subject/update/{id}', [AssignSubjectToClassController::class, 'update'])->name('assign-subject.update');
         Route::get('/assign-subject/delete/{id}', [AssignSubjectToClassController::class, 'delete'])->name('assign-subject.delete');
 
+        // Assign Subject and Class to Teacher
+        Route::get('/assign-teacher/create', [AssignTeacherToClassController::class, 'index'])->name('assign-teacher.create');
+        Route::post('/assign-teacher/store', [AssignTeacherToClassController::class, 'store'])->name('assign-teacher.store');
+        Route::get('/assign-teacher/read', [AssignTeacherToClassController::class, 'read'])->name('assign-teacher.read');
+        Route::get('/assign-teacher/edit/{id}', [AssignTeacherToClassController::class, 'edit'])->name('assign-teacher.edit');
+        Route::put('/assign-teacher/update/{id}', [AssignTeacherToClassController::class, 'update'])->name('assign-teacher.update');
+        Route::get('/assign-teacher/delete/{id}', [AssignTeacherToClassController::class, 'delete'])->name('assign-teacher.delete');
+        Route::get('findSubject', [AssignTeacherToClassController::class, 'findSubject'])->name('findSubject');
+        // 
         // Teacher Management routes
         Route::get('/teacher/create', [TeacherController::class, 'index'])->name('teacher.create');
         Route::post('/teacher/store', [TeacherController::class, 'store'])->name('teacher.store');

@@ -8,6 +8,69 @@ use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
+    // Teacher Login View
+    public function teacherLogin()
+    {
+        return view('teacher.login');
+    }
+
+    // Teacher Login Authentication
+    public function teacherAuthenticate(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => 'teacher',
+        ])) {
+            return redirect()->route('teacher.dashboard');
+        }
+        return back()->with('error', 'Invalid Login Details');
+    }
+
+    // Teacher Dashboard
+    public function teacherDashboard()
+    {
+        return view('teacher.dashboard');
+    }
+
+    // Teacher Logout
+    public function teacherLogout()
+    {
+        auth()->logout();
+        return redirect()->route('teacher.login')->with('success', 'Logout Successfully');
+    }
+
+    // Change Password View
+    public function changePassword()
+    {
+        return view('teacher.change_password');
+    }
+
+    // Update Password
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'password_confirmation' => 'required|same:new_password',
+        ]);
+
+        $user = User::find(auth()->user()->id);
+
+        if (Hash::check($request->old_password, $user->password)) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return back()->with('success', 'Password Updated Successfully');
+        } else {
+            return back()->with('error', 'Invalid Old Password');
+        }
+    }
+
     public function index()
     {
         return view('admin.teacher.form');
