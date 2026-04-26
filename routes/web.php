@@ -49,6 +49,7 @@ Route::group(['prefix' => 'student'], function () {
 
     Route::group(['middleware' => 'student.auth'], function () {
         Route::get('/dashboard', [userController::class, 'dashboard'])->name('student.dashboard');
+        Route::get('/my-subjects', [userController::class, 'mySubjects'])->name('student.mySubjects');
         Route::get('/logout', [userController::class, 'logout'])->name('student.logout');
         Route::get('/change-password', [userController::class, 'changePassword'])->name('student.changePassword');
         Route::put('/update-password', [userController::class, 'updatePassword'])->name('student.updatePassword');
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'teacher'], function () {
 
     Route::group(['middleware' => 'teacher.auth'], function () {
         Route::get('/dashboard', [TeacherController::class, 'teacherDashboard'])->name('teacher.dashboard');
+        Route::get('/my-classes', [TeacherController::class, 'myClasses'])->name('teacher.myClasses');
         Route::get('/logout', [TeacherController::class, 'teacherLogout'])->name('teacher.logout');
         Route::get('/change-password', [TeacherController::class, 'changePassword'])->name('teacher.changePassword');
         Route::put('/update-password', [TeacherController::class, 'updatePassword'])->name('teacher.updatePassword');

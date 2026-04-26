@@ -16,6 +16,7 @@ class StudentAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Agar login hai lekin student nahi hai → logout
         if (!Auth::check() || Auth::user()->role !== 'student') {
             return redirect('/student/login');
         }

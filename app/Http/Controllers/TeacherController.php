@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignTeacherToClass;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
@@ -21,6 +23,8 @@ class TeacherController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
+
+        Auth::logout();
 
         if (auth()->attempt([
             'email' => $request->email,
@@ -155,5 +159,12 @@ class TeacherController extends Controller
         $teacher = User::findOrFail($id);
         $teacher->delete();
         return redirect()->route('teacher.read')->with('success', 'Teacher deleted successfully!');
+    }
+
+    public function myClasses()
+    {
+        $teacher_id = auth()->user()->id;
+        $assignTeacher = AssignTeacherToClass::where('teacher_id', $teacher_id)->with('class', 'subject')->get();
+        return view('teacher.my_classes', compact('assignTeacher'));
     }
 }

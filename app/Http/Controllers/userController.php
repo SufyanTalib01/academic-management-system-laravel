@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announcement;
+use App\Models\AssignTeacherToClass;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use PHPUnit\Metadata\Uses;
 
@@ -21,6 +23,8 @@ class userController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
+
+        Auth::logout();
 
         if (auth()->attempt([
             'email' => $request->email,
@@ -68,5 +72,12 @@ class userController extends Controller
         } else {
             return back()->with('error', 'Invalid Old Password');
         }
+    }
+
+    public function mySubjects()
+    {
+        $class_id = auth()->user()->class_id;
+        $data['subjects'] = AssignTeacherToClass::where('class_id', $class_id)->with('subject', 'teacher')->get();
+        return view('student.my_subjects', $data);
     }
 }
