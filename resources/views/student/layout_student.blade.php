@@ -202,6 +202,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.mySubjects') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    My Subjects
+
+                                </p>
+                            </a>
+                        </li>
 
 
                         <li class="nav-item">

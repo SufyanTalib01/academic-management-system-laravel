@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Assign Teacher</h1>
+                        <h1>Time Table</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Assign Teacher</li>
+                            <li class="breadcrumb-item active">Time Table</li>
                         </ol>
                     </div>
                 </div>
@@ -24,6 +24,12 @@
             </div>
         @endif
 
+        @if (Session::has('error'))
+            <div class="alert alert-danger mt-3 mx-3">
+                {{ Session::get('error') }}
+            </div>
+        @endif
+
 
         <section class="content">
             <div class="container-fluid">
@@ -31,12 +37,12 @@
                     <div class="col-md-12">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Add Assign Teacher</h3>
+                                <h3 class="card-title">Create Time Table</h3>
                             </div>
 
 
 
-                            <form action="{{ route('assign-teacher.store') }}" method="post">
+                            <form action="{{ route('time-table.store') }}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -54,6 +60,7 @@
                                         @error('class_id')
                                             <p class="invalid-feedback">{{ $message }}</p>
                                         @enderror
+
                                     </div>
 
 
@@ -61,33 +68,39 @@
                                         <label for="subject_id">Subject Name</label>
                                         <Select class="form-control @error('subject_id') is-invalid @enderror"
                                             id="subject_id" name="subject_id">
-                                            <option value="">Select Subject</option>
-
+                                            <option value="">Select Class</option>
                                         </Select>
                                         @error('subject_id')
                                             <p class="invalid-feedback">{{ $message }}</p>
                                         @enderror
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="teacher_id">Teacher Name</label>
-                                        <Select class="form-control @error('teacher_id') is-invalid @enderror"
-                                            id="teacher_id" name="teacher_id">
-                                            <option value="">Select Teacher</option>
-                                            @foreach ($teachers as $teacher)
-                                                <option value="{{ $teacher->id }}"
-                                                    {{ old('teacher_id') == $teacher->id ? 'selected' : '' }}>
-                                                    {{ $teacher->name }}
-                                                </option>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Day</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th>Room No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="subject-tbody">
+                                            @php $i = 1; @endphp @foreach ($days as $day)
+                                                <tr>
+                                                    <td>{{ $day->name }}</td> <input type="hidden"
+                                                        name="timetable[{{ $i }}][day_id]"
+                                                        value="{{ $day->id }}">
+                                                    <td> <input type="time"
+                                                            name="timetable[{{ $i }}][start_time]">
+                                                    </td>
+                                                    <td> <input type="time"
+                                                            name="timetable[{{ $i }}][end_time]"> </td>
+                                                    <td> <input type="number"
+                                                            name="timetable[{{ $i }}][room_no]"> </td>
+                                                </tr> @php $i++; @endphp
                                             @endforeach
-                                        </Select>
-                                        @error('teacher_id')
-                                            <p class="invalid-feedback">{{ $message }}</p>
-                                        @enderror
-
-
-
-                                    </div>
+                                        </tbody>
+                                    </table>
 
 
 

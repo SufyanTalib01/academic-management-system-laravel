@@ -25,6 +25,7 @@ class TeacherController extends Controller
         ]);
 
         Auth::logout();
+        Auth::guard('admin')->logout();
 
         if (auth()->attempt([
             'email' => $request->email,

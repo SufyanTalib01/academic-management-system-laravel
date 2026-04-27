@@ -25,6 +25,7 @@ class userController extends Controller
         ]);
 
         Auth::logout();
+        Auth::guard('admin')->logout();
 
         if (auth()->attempt([
             'email' => $request->email,
@@ -77,7 +78,7 @@ class userController extends Controller
     public function mySubjects()
     {
         $class_id = auth()->user()->class_id;
-        $data['subjects'] = AssignTeacherToClass::where('class_id', $class_id)->with('subject', 'teacher')->get();
-        return view('student.my_subjects', $data);
+        $data['assigns'] = AssignTeacherToClass::where('class_id', $class_id)->with('subject', 'teacher')->get();
+        return view('student.my_subject', $data);
     }
 }

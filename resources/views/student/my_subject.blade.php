@@ -11,12 +11,12 @@
              <div class="container-fluid">
                  <div class="row mb-2">
                      <div class="col-sm-6">
-                         <h1>My Class and Subject List</h1>
+                         <h1>My Subjects List</h1>
                      </div>
                      <div class="col-sm-6">
                          <ol class="breadcrumb float-sm-right">
                              <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                             <li class="breadcrumb-item active">My Class and Subject List</li>
+                             <li class="breadcrumb-item active">My Subjects List</li>
                          </ol>
                      </div>
                  </div>
@@ -37,7 +37,7 @@
 
                          <div class="card">
                              <div class="card-header">
-                                 <h3 class="card-title">My Classes and Subjects</h3>
+                                 <h3 class="card-title">My Subjects</h3>
                              </div>
 
 
@@ -47,27 +47,27 @@
                                      <thead>
                                          <tr>
                                              <th>ID</th>
-                                             <th>Class Name</th>
                                              <th>Subject Name</th>
                                              <th>Theory/Practical</th>
+                                             <th>Teacher Name</th>
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         @foreach ($assignTeacher as $item)
+                                         @foreach ($assigns as $item)
                                              <tr>
                                                  <td>{{ $loop->iteration }}</td>
-                                                 <td>{{ $item->class->name }}</td>
                                                  <td>{{ $item->subject->name }}</td>
                                                  <td>{{ $item->subject->type }}</td>
+                                                 <td>{{ $item->teacher->name }}</td>
                                              </tr>
                                          @endforeach
                                      </tbody>
                                      <tfoot>
                                          <tr>
                                              <th>ID</th>
-                                             <th>Class Name</th>
                                              <th>Subject Name</th>
                                              <th>Theory/Practical</th>
+                                             <th>Teacher Name</th>
                                          </tr>
                                      </tfoot>
                                  </table>

@@ -14,6 +14,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\thirdPartyApi;
+use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\userController;
 use App\Models\Announcement;
 use App\Models\Classes;
@@ -164,6 +165,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/teacher/edit/{id}', [TeacherController::class, 'edit'])->name('teacher.edit');
         Route::put('/teacher/update/{id}', [TeacherController::class, 'update'])->name('teacher.update');
         Route::get('/teacher/delete/{id}', [TeacherController::class, 'delete'])->name('teacher.delete');
+
+        // Time Table Management routes
+        Route::get('/time-table/create', [TimetableController::class, 'index'])->name('time-table.create');
+        Route::get('/time-table/findSubject', [TimetableController::class, 'FindSubject'])->name('time-table.findSubject');
+        Route::post('/time-table/store', [TimetableController::class, 'store'])->name('time-table.store');
+        Route::get('/time-table/read', [TimetableController::class, 'read'])->name('time-table.read');
+        Route::get('/time-table/delete/{id}', [TimetableController::class, 'delete'])->name('time-table.delete');
 
         // Announcement
         Route::get('/announcement/create', [AnnouncementController::class, 'index'])->name('announcement.create');
