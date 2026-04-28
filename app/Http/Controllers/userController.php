@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Announcement;
 use App\Models\AssignTeacherToClass;
+use App\Models\Timetable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,5 +81,22 @@ class userController extends Controller
         $class_id = auth()->user()->class_id;
         $data['assigns'] = AssignTeacherToClass::where('class_id', $class_id)->with('subject', 'teacher')->get();
         return view('student.my_subject', $data);
+    }
+
+    public function timetable()
+    {
+        $student_class_id = Auth::user()->class_id;
+        $timetable = Timetable::with(['day', 'subject'])->where('class_id', $student_class_id)->latest()->get();
+        $group = [];
+        foreach ($timetable as $item) {
+            $group[$item->day->name][] = [
+                'subject' => $item->subject->name,
+                'start_time' => $item->start_time,
+                'end_time' => $item->end_time,
+                'room_no' => $item->room_no
+            ];
+        }
+        $data['group'] = $group;
+        return view('student.timetable', $data);
     }
 }

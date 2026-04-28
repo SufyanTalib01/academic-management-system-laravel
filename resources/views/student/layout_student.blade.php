@@ -211,6 +211,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('student.timetable') }}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Time Table
+
+                                </p>
+                            </a>
+                        </li>
 
 
                         <li class="nav-item">
