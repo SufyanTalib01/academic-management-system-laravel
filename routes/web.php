@@ -36,7 +36,7 @@ use PhpParser\Node\Expr\Assign;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('student.login');
 });
 
 
